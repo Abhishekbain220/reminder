@@ -18,10 +18,16 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(morgan("tiny"))
+
+const allowedOrigins = [
+  "http://localhost:3000",             // for local development
+  "https://your-frontend.vercel.app",  // replace with your real frontend domain
+];
+
 app.use(cors({
-    origin: true,
-    credentials: true
-}))
+  origin: allowedOrigins,
+  credentials: true, // allows cookies if using
+}));
 
 
 setInterval(async () => {

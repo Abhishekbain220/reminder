@@ -49,13 +49,10 @@ module.exports.login = async (req, res, next) => {
         let token = user.generateAuthToken()
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // only true in production HTTPS
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            secure: true,
+            sameSite: none,
             maxAge: 1000 * 60 * 60 * 5 // 5 hours
-        }).json({
-            success: true,
-            user
-        });
+        })
 
         res.status(200).json({
             message: "Login Successful",
