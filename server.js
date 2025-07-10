@@ -68,9 +68,10 @@ app.use("/member", memberRouter)
 
 
 app.use((req, res, next) => {
-    const error = new Error("Route not found");
-    error.status = 404;
-    next(error);
+   res.status(404).json({
+        success: false,
+        message: "Route not found"
+    });
 });
 
 
