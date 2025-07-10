@@ -3,10 +3,10 @@ let CustomError = require("../utils/customError")
 
 module.exports.currentUser = (req, res, next) => {
     try {
-        
+
         res.status(200).json({
             user: req.user,
-            
+
         })
     } catch (error) {
         console.log(error)
@@ -19,7 +19,7 @@ module.exports.signup = async (req, res, next) => {
         let existingUser = await User.findOne({ email })
         if (existingUser) return next(new CustomError("User already exist", 400))
         let newUser = await User.create({
-            username, email, password, isAdmin:true
+            username, email, password, isAdmin: true
 
         })
         await newUser.save()
@@ -49,8 +49,10 @@ module.exports.login = async (req, res, next) => {
         let token = user.generateAuthToken()
         res.cookie("token", token, {
             httpOnly: true,
+            secure: true, // required for HTTPS in production
+            sameSite: "none", // important for cross-origin cookies
             maxAge: 1000 * 60 * 60 * 5
-        })
+        }).json({success:true})
         res.status(200).json({
             message: "Login Successful",
             token
@@ -93,15 +95,15 @@ module.exports.updateProfile = async (req, res, next) => {
     }
 }
 
-module.exports.checkAdmin=async(req,res,next)=>{
+module.exports.checkAdmin = async (req, res, next) => {
     try {
-        let admin=await User.findOne({isAdmin:true})
+        let admin = await User.findOne({ isAdmin: true })
         res.status(200).json({
             admin
         })
     } catch (error) {
         console.log(error)
-        next(new CustomError(error.message,500))
+        next(new CustomError(error.message, 500))
     }
 }
 
