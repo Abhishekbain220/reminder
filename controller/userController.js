@@ -47,12 +47,13 @@ module.exports.login = async (req, res, next) => {
 
         let user = await User.authenticate(email, password)
         let token = user.generateAuthToken()
+
         res.cookie("token", token, {
             httpOnly: true,
             secure: true,
-            sameSite: none,
+            sameSite: "None", // Required for cross-site cookies
             maxAge: 1000 * 60 * 60 * 5 // 5 hours
-        })
+        });
 
         res.status(200).json({
             message: "Login Successful",
