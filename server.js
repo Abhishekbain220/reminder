@@ -21,7 +21,7 @@ app.use(morgan("tiny"))
 
 const allowedOrigins = [
   "http://localhost:5173",             // for local development
-  "https://reminderf-l4zcggav9-abhishek-bains-projects.vercel.app",  // replace with your real frontend domain
+  "https://reminderf.vercel.app",  // replace with your real frontend domain
 ];
 
 app.use(cors({
