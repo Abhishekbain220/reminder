@@ -20,8 +20,8 @@ app.use(cookieParser())
 app.use(morgan("tiny"))
 
 const allowedOrigins = [
-  "http://localhost:3000",             // for local development
-  "https://your-frontend.vercel.app",  // replace with your real frontend domain
+  "http://localhost:5173",             // for local development
+  "https://reminderf-l4zcggav9-abhishek-bains-projects.vercel.app",  // replace with your real frontend domain
 ];
 
 app.use(cors({
