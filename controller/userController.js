@@ -52,7 +52,7 @@ module.exports.login = async (req, res, next) => {
             secure: true, // required for HTTPS in production
             sameSite: "none", // important for cross-origin cookies
             maxAge: 1000 * 60 * 60 * 5
-        }).json({success:true})
+        }).json({success:true,user})
         res.status(200).json({
             message: "Login Successful",
             token
